@@ -1,0 +1,23 @@
+
+body{
+	background-color: #f1f1f2;
+}
+h1{
+	font-size: 40px;
+	display:inline;
+	text-transform: uppercase;
+	color:#414042;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+}
+div.heading{
+	text-align: center;
+}
+div.y-axis{
+    -webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+	float:left;
+	display:block;
+	margin: 300px 0 0 -100px;
+}
