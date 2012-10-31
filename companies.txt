@@ -1,0 +1,84 @@
+--Modest/Strong--
+Plaza Las Américas
+Public Storage
+--Modest/Satisfactory--
+National Retail Properties
+Piedmont Office Realty Trust
+PS Business Parks
+Realty Income Corp.
+Tanger Factory Outlet Centers
+--Intermediate/Satisfactory--
+Alexandria Real Estate Equities
+American Campus Communities
+BioMed Realty
+BRE Properties
+Camden Property
+Commonwealth REIT
+CubeSmart
+Digital Realty
+Duke Realty
+Essex Property
+Federal Realty Investment
+HCP
+Health Care REIT
+Healthcare Realty Trust
+RioCan REIT
+Sabra Health Care REIT
+Senior Housing Properties
+Simon Property Group
+SL Green Realty
+Sovran Self Storage
+Spirit Realty Capital
+Tanger Factory Outlet Centers
+UDR
+Ventas
+Vornado Realty
+Washington Real Estate Investment
+Weingarten Realty Investors
+Wells Real Estate Investment Trust II
+
+--Intermediate/Fair--
+Associated estates Realty Corp.
+Brandywine Realty Trust
+Colonial Properties Trust
+Colonial Properties Trust
+Equity One
+Healthcare Trust of America
+Hospitality Properities Trust
+Medical Properties Trust
+Omega Healthcare Investors
+Wells Real Estate Investment Trust II
+
+--Significant/Strong--
+Brookfield Office Properties
+RioCan REIT
+
+--Significant/Satisfactory
+AIMCO
+Prolois
+SL Green Realty Corp.
+
+--Significant/Fair--
+American Realty Trust
+Entertainment Properties Trust
+Morguard REIT
+
+--Aggressive/Satisfactory--
+DDR Corp.
+General Growth Properties
+
+
+--Aggressive/fair--
+Aviv REIT
+Brixmor
+CNL Lifestyle Properties
+DuPoint Fabros Technology
+First Industrial Realty Trust
+Glimcher Realty Trust
+Sabra Health Care REIT
+
+--Highly Leveraged/fair--
+Capital Automotive LP
+Forest City Enterprises
+Spirit Realty Capita
+
