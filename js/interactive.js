@@ -2,17 +2,17 @@
 $('tr td').each(function(){
 	var ind = $(this).index();
 	switch(ind){
-		case 1:$(this).addClass('Minial');
+		case 1:$(this).addClass('minimal');
 		break;
-		case 2:$(this).addClass('Modest');
+		case 2:$(this).addClass('modest');
 		break;
-		case 3:$(this).addClass('Intermediate');
+		case 3:$(this).addClass('intermediate');
 		break;
-		case 4:$(this).addClass('Significant');
+		case 4:$(this).addClass('significant');
 		break;
-		case 5:$(this).addClass('Agressive');
+		case 5:$(this).addClass('aggressive');
 		break;
-		case 6:$(this).addClass('Highly_Leveraged');
+		case 6:$(this).addClass('highly_leveraged');
 		break;
 	}
 

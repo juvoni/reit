@@ -41,3 +41,123 @@ td{
 	height:50px;
 	border: 2px white solid;
 }
+tr.excellent{}
+tr.strong{}
+tr.satisfactory{}
+tr.fair{}
+tr.weak{}
+tr.vulnerable{}
+
+tr.excellent td.minimal{
+	background-color: #fdede4;
+}
+tr.excellent td.modest{
+	background-color: #fce1d3;
+}
+tr.excellent td.intermediate{
+	background-color: #fcd9c9;
+}
+tr.excellent td.significant{
+	background-color: #fdcebc;
+}
+tr.excellent td.aggressive{
+	background-color: #fab39b;
+}
+tr.excellent td.highly_leveraged{
+	background-color: #f8a084;
+}
+
+tr.strong td.minimal{
+	background-color: #fcdbcb;
+}
+tr.strong td.modest{
+	background-color: #fdcebc;
+}
+tr.strong td.intermediate{
+	background-color: #fab7a0;
+}
+tr.strong td.significant{
+	background-color: #fab39b;
+}
+tr.strong td.aggressive{
+	background-color: #f8a488;
+}
+tr.strong td.highly_leveraged{
+	background-color: #f58e70;
+}
+
+tr.satisfactory td.minimal{
+	background-color: #fcdbcb;
+}
+tr.satisfactory td.modest{
+	background-color: #fdcebc;
+}
+tr.satisfactory td.intermediate{
+	background-color: #fab7a0;
+}
+tr.satisfactory td.significant{
+	background-color: #f8a084;
+}
+tr.satisfactory td.aggressive{
+	background-color: #f58e70;
+}
+tr.satisfactory td.highly_leveraged{
+	background-color: #f37a5c;
+}
+
+tr.fair td.minimal{
+	background-color: #fdd2c1;
+}
+tr.fair td.modest{
+	background-color: #fcc2ad;
+}
+tr.fair td.intermediate{
+	background-color: #f9a98f;
+}
+tr.fair td.significant{
+	background-color: #f69375;
+}
+tr.fair td.aggressive{
+	background-color: #f37a5c;
+}
+tr.fair td.highly_leveraged{
+	background-color: #f15e43;
+}
+
+tr.weak td.minimal{
+	background-color: #fcc2ad;
+}
+tr.weak td.modest{
+	background-color: #f9ad93;
+}
+tr.weak td.intermediate{
+	background-color: #f79779;
+}
+tr.weak td.significant{
+	background-color: #f37a5c;
+}
+tr.weak td.aggressive{
+	background-color: #f26548;
+}
+tr.weak td.highly_leveraged{
+	background-color: #ef3f30;
+}
+
+tr.vulnerable td.minimal{
+	background-color: #f9ad93;
+}
+tr.vulnerable td.modest{
+	background-color: #f69375;
+}
+tr.vulnerable td.intermediate{
+	background-color: #f37a5c;
+}
+tr.vulnerable td.significant{
+	background-color: #f15940;
+}
+tr.vulnerable td.aggressive{
+	background-color: #ef372e;
+}
+tr.vulnerable td.highly_leveraged{
+	background-color: #ee1c25;
+}
