@@ -13,6 +13,12 @@ ul li{
 	font-size: 12px;
 	font-weight: bold;
 	margin: 0 0 3px 5px;
+	color:#414042;
+}
+li:hover{
+	text-decoration:underline;
+	text-decoration-color:#E3173E;
+	cursor: pointer;
 }
 h1{
 	font-size: 40px;
@@ -58,10 +64,10 @@ td{
 	padding:0px;
 	margin: 0px;
 	background-color: yellow;
-	height:50px;
 	border: 2px white solid;
+	height:30px;
 	min-width: 50px;
-	min-height: 50px;
+	min-height: 30px;
 	max-height: 200px;
 	vertical-align: top;
 }
@@ -79,11 +85,20 @@ tr.satisfactory td.intermediate ul{
     column-count: 2;
     column-gap: 20px;
 }
+tr.fair td.intermediate ul{
+	-moz-column-count: 2;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 20px;
+    column-count: 2;
+    column-gap: 20px;
+}
+}
 tr.excellent{height:30px;}
 tr.strong{height:60px;}
 tr.satisfactory{height:300px;}
 tr.fair{height:150px;}
-tr.weak{height:50px;}
+tr.weak{height:30px;}
 tr.vulnerable{height:30px;}
 
 td.minimal{width:30px;}
