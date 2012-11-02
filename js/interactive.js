@@ -61,6 +61,7 @@ function init(){
 			break;
 		}
 	});
+	renderContent();
 };
 
 function renderContent(){
@@ -84,13 +85,13 @@ function renderContent(){
 };
 
 init();
-renderContent();
+
 $("td").each(function() {
     var $this = $(this);
     $.data(this, 'css', { opacity: $this.css('opacity'), 
                           width: $this.css('width'),
                           height: $this.parent().css('height') });
-  });
+});
 
 
  function restore() {
@@ -98,7 +99,14 @@ $("td").each(function() {
     var orig = $.data(this, 'css');
     $(this).animate({opacity: orig.opacity, width: orig.width, height: orig.height}, 600);
   });
-}
+	$('h2').animate({
+		fontSize:"22px"
+	},1000);
+	$('div.y-axis').animate({
+		marginTop:"300px"
+	},1000);
+};
+
 function shrink(){
 	$('#canvas tr').animate({
 			height: "30px"
@@ -121,27 +129,38 @@ function clearContent(){
 	});
 };
 
-$("ul").delegate('li', 'click', function () {
-	//console.log("Company Clicked!");
-});
+function listen(){
+	$("ul li").click(function(){
+		var selection = $(this).text();
+		console.log(selection);
+		clearContent();
+		shrink();
+		$('.max').show();
+		$('.siblings').show().animate({
+		opacity: 1,
+		width:"400px",
+		height:"300px"
+	},1000);
+		$('.child').show().animate({
+		opacity: 1,
+		width:"400px",
+		height:"300px"
+	},1000);
+	});
+};
+listen();
+
 $('td').click(function(){
-	if($(this).html() === ''){
-		console.log('It\'s empty!');
+	if($(this).html() === '')
 		$('.warning').fadeIn('700').css("display","inline").fadeOut('200');
-	}
-	else
-		console.log('There\'s something here!');
+});
+$('.max').click(function(){
+	restore();
+	renderContent();
+	listen();
+	$('.max').hide();
+	$('.siblings').hide();
+	$('.child').hide();
+
 });
 
-$('button.cl').on('click', function() {
-	clearContent();
-});
-$('button.restore').on('click', function() {
-	restore();
-});
-$('button.populate').on('click', function() {
-	renderContent();
-});
-$('button.shrink').on('click', function() {
-	shrink();
-});
