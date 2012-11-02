@@ -30,6 +30,9 @@ li:hover{
 	text-decoration-color:#E3173E;
 	cursor: pointer;
 }
+button{
+	margin-left: 50px;
+}
 h1{
 	font-size: 40px;
 	display:inline;
@@ -80,8 +83,7 @@ td{
 	border: 2px white solid;
 	height:30px;
 	min-width: 50px;
-	min-height: 30px;
-	max-height: 200px;
+	/*min-height: 80px;*/
 	vertical-align: top;
 }
 td:hover{

@@ -67,23 +67,53 @@ function renderContent(){
 	var items = [];
 	$('td').each(function(){
 		items.length = 0;
+		var $this = $(this);
 		for(var i = 0; i<binder.length;i++){
-			if($(this).attr("class") === binder[i].getFinancial() && $(this).closest("tr").attr("class") === binder[i].getBusiness()){
-				 if ($(this).find('ul').length > 0){
+			if($this.attr("class") === binder[i].getFinancial() && $this.closest("tr").attr("class") === binder[i].getBusiness()){
+				 if ($this.find('ul').length > 0){
 					items.push('<li>'+binder[i].getName()+'</li>');
 				 }
 				 else{
-					$(this).append("<ul></ul>");
+					$this.append("<ul></ul>");
 					items.push('<li>'+binder[i].getName()+'</li>');
 				 }
 			}
 		}
-		$(this).find('ul').append(items.join(''));
+		$this.find('ul').append(items.join(''));
 	});
 };
 
 init();
 renderContent();
+$("td").each(function() {
+    var $this = $(this);
+    $.data(this, 'css', { opacity: $this.css('opacity'), 
+                          width: $this.css('width'),
+                          height: $this.parent().css('height') });
+  });
+
+
+ function restore() {
+  $("tr td").each(function() {
+    var orig = $.data(this, 'css');
+    $(this).animate({opacity: orig.opacity, width: orig.width, height: orig.height}, 600);
+  });
+}
+function shrink(){
+	$('#canvas tr').animate({
+			height: "30px"
+		},1000);
+
+	$('td').animate({
+		width: "70px",
+		height: "30px"
+	},800);
+};
+function clearContent(){
+	$('td').each(function(){
+		$(this).html('');
+	});
+};
 
 $("ul").delegate('li', 'click', function () {
 	//console.log("Company Clicked!");
@@ -95,4 +125,17 @@ $('td').click(function(){
 	}
 	else
 		console.log('There\'s something here!');
+});
+
+$('button.cl').on('click', function() {
+	clearContent();
+});
+$('button.restore').on('click', function() {
+	restore();
+});
+$('button.populate').on('click', function() {
+	renderContent();
+});
+$('button.shrink').on('click', function() {
+	shrink();
 });
