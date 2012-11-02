@@ -65,11 +65,15 @@ div.y-axis{
 	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 	float:left;
 	display:block;
-	margin: 300px 0 0 -180px;
+	margin: 300px 0 0 -200px;
+	padding:20px;
 }
 table{
 	margin: 0 0 0 -150px;
-	}
+}
+thead{
+	margin-left: 30px;
+}
 th{
 	text-transform: uppercase;
 	color:#808080;

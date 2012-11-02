@@ -108,6 +108,12 @@ function shrink(){
 		width: "70px",
 		height: "30px"
 	},800);
+	$('h2').animate({
+		fontSize:"12px"
+	},1000);
+	$('div.y-axis').animate({
+		marginTop:"100px"
+	},1000);
 };
 function clearContent(){
 	$('td').each(function(){
