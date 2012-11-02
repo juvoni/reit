@@ -28,7 +28,7 @@ ul li{
 .max{
 	display:none;
 	opacity:0.4;
-	margin-left: 500px;
+	margin: 0 0 0 500px;
 	transition: opacity .25s ease-in-out;
 	-moz-transition: opacity .25s ease-in-out;
 	-webkit-transition: opacity .25s ease-in-out;
@@ -109,17 +109,28 @@ td:hover{
 }
 #infoSection{
 	margin-left: 20px;
-	margin-top: 20px;
+	margin-top: 40px;
+	width: 900px;
+	height:310px;
+	display:block;
 }
 .siblings, .child{
-	margin-left: 30px;
 	background: #ccc;
-	display:inline;
 	visibility: none;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	text-align: center;
+	font-size: 22px;
+	padding:0;
+	margin: 0  30px 0 0;
+}
+.siblings{
+	display:inline;
 }
 .child{
+	top:0;
+	position: relative;
+	display:inline;
 }
-
 tr.satisfactory td.intermediate ul{
 
 	-moz-column-count: 2;

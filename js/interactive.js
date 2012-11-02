@@ -132,20 +132,24 @@ function clearContent(){
 function listen(){
 	$("ul li").click(function(){
 		var selection = $(this).text();
-		console.log(selection);
+		//console.log(selection);
 		clearContent();
 		shrink();
 		$('.max').show();
 		$('.siblings').show().animate({
 		opacity: 1,
-		width:"400px",
+		width:"350px",
 		height:"300px"
-	},1000);
+	},1000).html(
+	"<p>List of Companies in Similar State</p>"
+	);
 		$('.child').show().animate({
 		opacity: 1,
-		width:"400px",
+		width:"450px",
 		height:"300px"
-	},1000);
+	},1000).html(
+	"<p>Company Profile</p>"
+	);
 	});
 };
 listen();
@@ -159,8 +163,8 @@ $('.max').click(function(){
 	renderContent();
 	listen();
 	$('.max').hide();
-	$('.siblings').hide();
-	$('.child').hide();
+	$('.siblings').html('').hide();
+	$('.child').html('').hide();
 
 });
 
