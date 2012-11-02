@@ -61,7 +61,6 @@ function init(){
 			break;
 		}
 	});
-	
 };
 
 function renderContent(){
@@ -74,7 +73,6 @@ function renderContent(){
 					items.push('<li>'+binder[i].getName()+'</li>');
 				 }
 				 else{
-					console.log('Got to Me');
 					$(this).append("<ul></ul>");
 					items.push('<li>'+binder[i].getName()+'</li>');
 				 }
@@ -86,3 +84,15 @@ function renderContent(){
 
 init();
 renderContent();
+
+$("ul").delegate('li', 'click', function () {
+	//console.log("Company Clicked!");
+});
+$('td').click(function(){
+	if($(this).html() === ''){
+		console.log('It\'s empty!');
+		$('.warning').fadeIn('700').css("display","inline").fadeOut('200');
+	}
+	else
+		console.log('There\'s something here!');
+});

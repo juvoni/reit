@@ -15,6 +15,16 @@ ul li{
 	margin: 0 0 3px 5px;
 	color:#414042;
 }
+.warning{
+	text-transform: uppercase;
+	display:none;
+	color:#E3173E;
+	font-size: 22px;
+	padding:0;
+	margin: 0;
+	margin-left: 50px;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
 li:hover{
 	text-decoration:underline;
 	text-decoration-color:#E3173E;
@@ -26,6 +36,8 @@ h1{
 	text-align: center;
 	position: relative;
 	text-transform: uppercase;
+	text-align: center;
+	position: relative;
 	color:#414042;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
@@ -37,7 +49,8 @@ h2{
 	color:#808080;
 	font-size: 22px;
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-	letter-spacing:5px
+	letter-spacing:5px;
+	display:inline;
 
 }
 div.heading{
