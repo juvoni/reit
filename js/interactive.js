@@ -128,11 +128,12 @@ function clearContent(){
 		$(this).html('');
 	});
 };
-
+var bg;
 function listen(){
 	$("ul li").click(function(){
 		var selection = $(this).text();
-		//console.log(selection);
+		//bg = $(this).parent().css('background-color');
+		console.log(bg);
 		clearContent();
 		shrink();
 		$('.max').show();
@@ -148,7 +149,7 @@ function listen(){
 		width:"450px",
 		height:"300px"
 	},1000).html(
-	"<p>Company Profile</p>"
+	"<p>Company Profile</p><br><p>"+selection+"</p>"
 	);
 	});
 };
