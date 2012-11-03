@@ -26,12 +26,19 @@ ul li{
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 .max{
+	width: 24px;
+	height: 24px;
 	display:none;
 	opacity:0.4;
 	margin: 0 0 0 500px;
 	transition: opacity .25s ease-in-out;
 	-moz-transition: opacity .25s ease-in-out;
 	-webkit-transition: opacity .25s ease-in-out;
+}
+@-moz-document url-prefix() {
+	.max{
+	margin: 0 0 0 620px;
+	}
 }
 .max:hover{
 	opacity: 1;
