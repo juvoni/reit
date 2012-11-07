@@ -38,6 +38,9 @@ $.getJSON('ajax/reit_data.json', function(data) {
 			binder.push(new reit_comp(this['Company Name'], this['Financial Risk Profile'], this['Business Risk Profile']));
 		});
 });
+var bg;
+var dataInfo = false;
+
 function init(){
 	$('tbody tr').each(function(){
 		for(var i = 0 ; i<6;i++){
@@ -94,16 +97,19 @@ $("td").each(function() {
 });
 
 
- function restore() {
+function restore() {
   $("tr td").each(function() {
     var orig = $.data(this, 'css');
     $(this).animate({opacity: orig.opacity, width: orig.width, height: orig.height}, 600);
   });
 	$('h2').animate({
-		fontSize:"22px"
+		fontSize:"22px",
+		marginLeft:"200px"
 	},1000);
-	$('div.y-axis').animate({
-		marginTop:"300px"
+	$('div.y-axis img').animate({
+			width: "39px",
+			height: "389px",
+			marginTop: "100px"
 	},1000);
 };
 
@@ -117,23 +123,32 @@ function shrink(){
 		height: "30px"
 	},800);
 	$('h2').animate({
-		fontSize:"12px"
+		fontSize:"16px",
+		marginLeft:"-40px"
 	},1000);
-	$('div.y-axis').animate({
-		marginTop:"100px"
+	$('div.y-axis img').animate({
+			width: "25px",
+			height: "260px",
+			marginTop: "-100px"
 	},1000);
 };
+
 function clearContent(){
 	$('td').each(function(){
 		$(this).html('');
 	});
 };
-var bg;
+
 function listen(){
+	$('td').click(function(){
+	if($(this).html() === '')
+		$('.warning').fadeIn('700').css("display","inline").fadeOut('200');
+	bg = $(this).css('backgroundColor');
+	console.log(bg);
+	$('.siblings').css('backgroundColor',bg);
+});
 	$("ul li").click(function(){
 		var selection = $(this).text();
-		//bg = $(this).parent().css('background-color');
-		console.log(bg);
 		clearContent();
 		shrink();
 		$('.max').show();
@@ -155,10 +170,7 @@ function listen(){
 };
 listen();
 
-$('td').click(function(){
-	if($(this).html() === '')
-		$('.warning').fadeIn('700').css("display","inline").fadeOut('200');
-});
+
 $('.max').click(function(){
 	restore();
 	renderContent();
