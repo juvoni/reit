@@ -38,6 +38,10 @@ $.getJSON('ajax/reit_data.json', function(data) {
 			binder.push(new reit_comp(this['Company Name'], this['Financial Risk Profile'], this['Business Risk Profile']));
 		});
 });
+var bg;
+var dataInfo = false;
+var companiesSimilar = [];
+
 function init(){
 	$('tbody tr').each(function(){
 		for(var i = 0 ; i<6;i++){
@@ -94,16 +98,19 @@ $("td").each(function() {
 });
 
 
- function restore() {
+function restore() {
   $("tr td").each(function() {
     var orig = $.data(this, 'css');
     $(this).animate({opacity: orig.opacity, width: orig.width, height: orig.height}, 600);
   });
 	$('h2').animate({
-		fontSize:"22px"
+		fontSize:"22px",
+		marginLeft:"200px"
 	},1000);
-	$('div.y-axis').animate({
-		marginTop:"300px"
+	$('div.y-axis img').animate({
+			width: "39px",
+			height: "389px",
+			marginTop: "100px"
 	},1000);
 };
 
@@ -117,55 +124,85 @@ function shrink(){
 		height: "30px"
 	},800);
 	$('h2').animate({
-		fontSize:"12px"
+		fontSize:"16px",
+		marginLeft:"-40px"
 	},1000);
-	$('div.y-axis').animate({
-		marginTop:"100px"
+	$('div.y-axis img').animate({
+			width: "25px",
+			height: "260px",
+			marginTop: "-100px"
 	},1000);
 };
+
 function clearContent(){
 	$('td').each(function(){
 		$(this).html('');
 	});
 };
-var bg;
-function listen(){
-	$("ul li").click(function(){
+
+
+function listenToMax(){
+	$li = $("ul li");
+	$siblings = $('.siblings');
+	$('td').click(function(){
+	if($(this).html() === '')
+		$('.warning').fadeIn('700').css("display","inline").fadeOut('200');
+	bg = $(this).css('backgroundColor');
+	console.log(bg);
+	$siblings.css('backgroundColor',bg);
+});
+	$li.click(function(){
 		var selection = $(this).text();
-		bg = $(this).parent().css('background-color');
-		console.log(bg);
 		clearContent();
 		shrink();
 		$('.max').show();
-		$('.siblings').show().animate({
+		$siblings.show().animate({
 		opacity: 1,
-		width:"350px",
+		width:"360px",
 		height:"300px"
 	},1000).html(
 	"<p>List of Companies in Similar State</p>"
 	).css('backgroundColor',bg);
 		$('.child').show().animate({
 		opacity: 1,
-		width:"450px",
+		width:"400px",
 		height:"300px"
 	},1000).html(
-	"<p>Company Profile</p><br><p>"+selection+"</p>"
+	"<p>Company Profile</p><p>"+selection+"</p>"+"<h3>Rating:<h3><span>BBB</span>"+
+	"<br>"+"<h3>Outlook:</h3><span>Positive</span><br><h3>Property</h3><br><h3>Subsector</h3>"
 	);
-	});
-};
-listen();
+	extract($(this).parent());
+	insert($siblings);
 
-$('td').click(function(){
-	if($(this).html() === '')
-		$('.warning').fadeIn('700').css("display","inline").fadeOut('200');
-});
+	});
+
+};
+listenToMax();
+
+
 $('.max').click(function(){
 	restore();
 	renderContent();
-	listen();
+	listenToMax();
 	$('.max').hide();
 	$('.siblings').html('').hide();
 	$('.child').html('').hide();
+	companiesSimilar.length = 0;
 
 });
 
+function extract(val){
+	$(val).find('li').each(function(){
+		companiesSimilar.push($(this).text());
+	});
+};
+
+function insert(that){
+	var content = "<p>List of Companies in Similar State</p>"
+	content +="<ul>";
+	for(var i = 0; i<companiesSimilar.length;i++){
+		content+="<li class = 'compSimilar'>"+companiesSimilar[i]+"</li>";
+	}
+	content += "</ul>";
+	that.html(content);
+};
