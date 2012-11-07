@@ -133,6 +133,10 @@ td:hover{
 }
 .siblings{
 	display:inline;
+	overflow:scroll;
+}
+.siblings ul li{
+	font-size: 18px;
 }
 .child{
 	top:0;
