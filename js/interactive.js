@@ -167,7 +167,8 @@ function listenToMax(){
 		width:"400px",
 		height:"300px"
 	},1000).html(
-	"<p>Company Profile</p><br><p>"+selection+"</p>"
+	"<p>Company Profile</p><p>"+selection+"</p>"+"<h3>Rating:<h3><span>BBB</span>"+
+	"<br>"+"<h3>Outlook:</h3><span>Positive</span><br><h3>Property</h3><br><h3>Subsector</h3>"
 	);
 	extract($(this).parent());
 	insert($siblings);
