@@ -157,14 +157,14 @@ function listenToMax(){
 		$('.max').show();
 		$siblings.show().animate({
 		opacity: 1,
-		width:"350px",
+		width:"360px",
 		height:"300px"
 	},1000).html(
 	"<p>List of Companies in Similar State</p>"
 	);
 		$('.child').show().animate({
 		opacity: 1,
-		width:"450px",
+		width:"400px",
 		height:"300px"
 	},1000).html(
 	"<p>Company Profile</p><br><p>"+selection+"</p>"
