@@ -70,38 +70,44 @@ function init(){
 
 function renderContent(){
 	var items = [];
+	var buffer = 0;
 	$('td').each(function(){
 		items.length = 0;
 		var $this = $(this);
 		for(var i = 0; i<binder.length;i++){
 			if($this.attr("class") === binder[i].getFinancial() && $this.closest("tr").attr("class") === binder[i].getBusiness()){
 				 if ($this.find('ul').length > 0){
-					items.push('<li>'+binder[i].getName()+'</li>');
+					if(buffer <=2){
+						items.push('<li>'+binder[i].getName()+'</li>');
+						buffer++;
+					}
 				 }
 				 else{
-					$this.append("<ul></ul>");
-					items.push('<li>'+binder[i].getName()+'</li>');
+						$this.append("<ul></ul>");
+						items.push('<li>'+binder[i].getName()+'</li>');
+						buffer++;
 				 }
 			}
 		}
 		$this.find('ul').append(items.join(''));
+		buffer = 0;
 	});
 };
 
 init();
 
 $("td").each(function() {
-    var $this = $(this);
-    $.data(this, 'css', { opacity: $this.css('opacity'), 
-                          width: $this.css('width'),
-                          height: $this.parent().css('height') });
+	var $this = $(this);
+	$.data(this, 'css', { opacity: $this.css('opacity'),
+						  width: $this.css('width'),
+						  height: $this.parent().css('height') });
 });
 
 
 function restore() {
   $("tr td").each(function() {
-    var orig = $.data(this, 'css');
-    $(this).animate({opacity: orig.opacity, width: orig.width, height: orig.height}, 600);
+	var orig = $.data(this, 'css');
+	$(this).animate({opacity: orig.opacity, width: orig.width, height: orig.height}, 600);
   });
 	$('h2').animate({
 		fontSize:"22px",

@@ -157,23 +157,29 @@ td:hover{
 }
 tr.satisfactory td.intermediate ul{
 
-	-moz-column-count: 2;
+/*	-moz-column-count: 2;
     -moz-column-gap: 20px;
     -webkit-column-count: 2;
     -webkit-column-gap: 20px;
     column-count: 2;
-    column-gap: 20px;
+    column-gap: 20px;*/
 }
 tr.fair td.intermediate ul{
-	-moz-column-count: 2;
+/*	-moz-column-count: 2;
     -moz-column-gap: 20px;
     -webkit-column-count: 2;
     -webkit-column-gap: 20px;
     column-count: 2;
-    column-gap: 20px;
+    column-gap: 20px;*/
 }
 
-tr.excellent{height:30px;}
+tr{
+	height:100px;
+}
+td{
+	width:160px;
+}
+/*tr.excellent{height:30px;}
 tr.strong{height:60px;}
 tr.satisfactory{height:300px;}
 tr.fair{height:150px;}
@@ -186,7 +192,7 @@ td.intermediate{width:320px;}
 td.significant{width:150px;}
 td.aggressive{width:120px;}
 td.highly_leveraged{width:100px;}
-
+*/
 
 tr.excellent td.minimal{
 	background-color: #fdede4;
