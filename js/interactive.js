@@ -42,6 +42,7 @@ var bg;
 var dataInfo = false,
 	active = false;
 var companiesSimilar = [];
+var finRisk, bizRisk;
 
 
 function init(){
@@ -77,8 +78,9 @@ function renderContent(){
 	$('td').each(function(){
 		items.length = 0;
 		var $this = $(this);
+		getParamters($this);
 		for(var i = 0; i<binder.length;i++){
-			if($this.attr("class") === binder[i].getFinancial() && $this.closest("tr").attr("class") === binder[i].getBusiness()){
+			if(finRisk === binder[i].getFinancial() && bizRisk === binder[i].getBusiness()){
 				 if ($this.find('ul').length > 0){
 					if(buffer <=2){
 						items.push('<li>'+binder[i].getName()+'</li>');
@@ -132,7 +134,6 @@ function shrink(){
 	$('#canvas tr').animate({
 			height: "30px"
 		},1000);
-
 	$('td').animate({
 		width: "70px",
 		height: "30px"
@@ -170,28 +171,31 @@ function listenToMax(){
 });
 
 	$li.click(function(){
-		var selection = $(this).text();
-		clearContent();
-		shrink();
+	  	var selection = $(this).text();
+	  	clearContent();
+	  	shrink();
+	  	if(selection === "more.."){
 
-		$('.info').show().animate({
+		}
+		else{
+					$('.info').css("visibility","visible").show().animate({
 			opacity: 1,
 			width:"30%",
 			height:"200px"
 		},1000);
 		$('.pick').html(selection);
 		$('.child').show().animate({
-		opacity: 1,
-		width:"400px",
-		height:"300px"
-	},1000).html(
-	"<p>Company Profile</p><p>"+selection+"</p>"+"<h3>Rating:<h3><span>BBB</span>"+
-	"<br>"+"<h3>Outlook:</h3><span>Positive</span><br><h3>Property</h3><br><h3>Subsector</h3>"
-	);
-	extract($(this).parent());
-	// $('#tableSection').fadeIn(400);
+			opacity: 1,
+			width:"400px",
+			height:"300px"
+		},1000).html(
+		"<p>Company Profile</p><p>"+selection+"</p>"+"<h3>Rating:<h3><span>BBB</span>"+
+		"<br>"+"<h3>Outlook:</h3><span>Positive</span><br><h3>Property</h3><br><h3>Subsector</h3>"
+		);
+		}
 
-	});
+	  	extract($(this).parent());
+	  	});
 	//	$(window).click(function(e) {
 	//	if(e.srcElement.className != 'info')// then e.srcElement.className has the class
 	//		restore();
@@ -207,9 +211,14 @@ $('img.closeBtn').click(function(){
 	$('.info').animate({
 		opacity:0
 	},1000);
+	$('.info').css("visibility","hidden");
 	companiesSimilar.length = 0;
 });
 
+function getParamters(that){
+		finRisk = that.attr("class");
+		bizRisk = that.closest("tr").attr("class");
+};
 function extract(val){
 	$(val).find('li').each(function(){
 		companiesSimilar.push($(this).text());
