@@ -43,6 +43,7 @@ var dataInfo = false;
 var companiesSimilar = [];
 
 function init(){
+	$('.info').hide();
 	$('tbody tr').each(function(){
 		for(var i = 0 ; i<6;i++){
 			$(this).append('<td></td>');
@@ -81,6 +82,10 @@ function renderContent(){
 						items.push('<li>'+binder[i].getName()+'</li>');
 						buffer++;
 					}
+					else if(buffer === 3){
+						items.push('<li class = "more">more..</li>');
+						buffer++;
+					}
 				 }
 				 else{
 						$this.append("<ul></ul>");
@@ -109,14 +114,14 @@ function restore() {
 	var orig = $.data(this, 'css');
 	$(this).animate({opacity: orig.opacity, width: orig.width, height: orig.height}, 600);
   });
-	$('h2').animate({
+	$('.heading h2').animate({
 		fontSize:"22px",
-		marginLeft:"200px"
+		marginLeft:"250px"
 	},1000);
 	$('div.y-axis img').animate({
 			width: "39px",
 			height: "389px",
-			marginTop: "100px"
+			marginTop: "80px"
 	},1000);
 };
 
@@ -131,12 +136,12 @@ function shrink(){
 	},800);
 	$('h2').animate({
 		fontSize:"16px",
-		marginLeft:"-40px"
+		marginLeft:"160px"
 	},1000);
 	$('div.y-axis img').animate({
 			width: "25px",
 			height: "260px",
-			marginTop: "-100px"
+			marginTop: "-80px"
 	},1000);
 };
 
@@ -149,25 +154,26 @@ function clearContent(){
 function listenToMax(){
 	$li = $("ul li");
 	$siblings = $('.siblings');
+	$info = $('.info')
 	$('td').click(function(){
 	if($(this).html() === '')
 		$('.warning').fadeIn('700').css("display","inline").fadeOut('200');
 	bg = $(this).css('backgroundColor');
-	console.log(bg);
-	$siblings.css('backgroundColor',bg);
+	//console.log(bg);
+	$info.css('backgroundColor',bg);
 });
 	$li.click(function(){
-		var selection = $(this).text();
-		clearContent();
-		shrink();
-		$('.max').show();
-		$siblings.show().animate({
-		opacity: 1,
-		width:"360px",
-		height:"300px"
-	},1000).html(
-	"<p>List of Companies in Similar State</p>"
-	);
+	  	var selection = $(this).text();
+	  	clearContent();
+	  	shrink();
+	  	$('.info').show();
+	//	$siblings.show().animate({
+	//	opacity: 1,
+	//	width:"360px",
+	//	height:"300px"
+	// },1000).html(
+	// "<p>List of Companies in Similar State</p>"
+	// );
 		$('.child').show().animate({
 		opacity: 1,
 		width:"400px",
@@ -177,22 +183,25 @@ function listenToMax(){
 	"<br>"+"<h3>Outlook:</h3><span>Positive</span><br><h3>Property</h3><br><h3>Subsector</h3>"
 	);
 	extract($(this).parent());
-	insert($siblings);
+	//insert($siblings);
+	$('#tableSection').fadeIn(400);
 
 	});
+	//	$(window).click(function(e) {
+	//	if(e.srcElement.className != 'info')// then e.srcElement.className has the class
+	//		restore();
+	// });
 
 };
 listenToMax();
 
-
-$('.max').click(function(){
+$('img.closeBtn').click(function(){
 	restore();
 	renderContent();
 	listenToMax();
-	$('.max').hide();
-	$('.siblings').html('').hide();
-	$('.child').html('').hide();
+	$('.info').hide();
 	companiesSimilar.length = 0;
+	console.log("click");
 
 });
 
