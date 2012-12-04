@@ -103,6 +103,12 @@ div.y-axis img{
 #infoSection{
 
 }
+.pick{
+	margin-top: 80px;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	text-align: center;
+	font-size: 22px;
+}
 .wrapper{
 	width: 100%;
 	height: 100%;
@@ -114,15 +120,15 @@ div.y-axis img{
 	right: 0px;
 }
 .info{
-	z-index: 10;
-	width: 30%;
-	height:200px;
-	background:red;
-	position: absolute;
-	top: 200px;
-	right: 500px;
-	border:2px solid white;
-	-webkit-box-shadow:  0px 1px 7px 1px rgba(0, 0, 0, 0.4);
+  	z-index: 10;
+/*	width: 30%;
+  	height:200px;*/
+  	background:red;
+  	position: absolute;
+  	top: 200px;
+  	right: 500px;
+  	border:2px solid white;
+  	-webkit-box-shadow:  0px 1px 7px 1px rgba(0, 0, 0, 0.4);
     box-shadow:  0px 1px 7px 1px rgba(0, 0, 0, 0.4);
 }
 thead tr th{
@@ -343,3 +349,70 @@ tr.vulnerable td.aggressive{
 tr.vulnerable td.highly_leveraged{
 	background-color: #ee1c25;
 }
+button.minimal {
+  position:absolute;
+  bottom:0;
+  right:0;
+  margin-right: 5px;
+  background: #e3e3e3;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+  box-shadow: inset 0 0 1px 1px #f6f6f6;
+  color: #333;
+  font: bold 12px/1 "helvetica neue", helvetica, arial, sans-serif;
+  padding: 8px 0 9px;
+  text-align: center;
+  text-shadow: 0 1px 0 #fff;
+  width: 50px; }
+  button.minimal:hover {
+    background: #d9d9d9;
+    -webkit-box-shadow: inset 0 0 1px 1px #eaeaea;
+    box-shadow: inset 0 0 1px 1px #eaeaea;
+    color: #222;
+    cursor: pointer; }
+  button.minimal:active {
+    background: #d0d0d0;
+    -webkit-box-shadow: inset 0 0 1px 1px #e3e3e3;
+    box-shadow: inset 0 0 1px 1px #e3e3e3;
+    color: #000; }
+/* cupid green (inspired by okcupid.com)
+*******************************************************************************/
+button.cupid-green {
+  position:absolute;
+  bottom:0;
+  right:0;
+  background-color: #7fbf4d;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7fbf4d), color-stop(100%, #63a62f));
+  background-image: -webkit-linear-gradient(top, #7fbf4d, #63a62f);
+  background-image: -moz-linear-gradient(top, #7fbf4d, #63a62f);
+  background-image: -ms-linear-gradient(top, #7fbf4d, #63a62f);
+  background-image: -o-linear-gradient(top, #7fbf4d, #63a62f);
+  background-image: linear-gradient(top, #7fbf4d, #63a62f);
+  border: 1px solid #63a62f;
+  border-bottom: 1px solid #5b992b;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 1px 0 0 #96ca6d;
+  box-shadow: inset 0 1px 0 0 #96ca6d;
+  color: #fff;
+  font: bold 11px/1 "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+  padding: 7px 0 8px 0;
+  text-align: center;
+  text-shadow: 0 -1px 0 #4c9021;
+  width: 150px; }
+  button.cupid-green:hover {
+    background-color: #76b347;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #76b347), color-stop(100%, #5e9e2e));
+    background-image: -webkit-linear-gradient(top, #76b347, #5e9e2e);
+    background-image: -moz-linear-gradient(top, #76b347, #5e9e2e);
+    background-image: -ms-linear-gradient(top, #76b347, #5e9e2e);
+    background-image: -o-linear-gradient(top, #76b347, #5e9e2e);
+    background-image: linear-gradient(top, #76b347, #5e9e2e);
+    -webkit-box-shadow: inset 0 1px 0 0 #8dbf67;
+    box-shadow: inset 0 1px 0 0 #8dbf67;
+    cursor: pointer; }
+  button.cupid-green:active {
+    border: 1px solid #5b992b;
+    border-bottom: 1px solid #538c27;
+    -webkit-box-shadow: inset 0 0 8px 4px #548c29, 0 1px 0 0 #eeeeee;
+    box-shadow: inset 0 0 8px 4px #548c29, 0 1px 0 0 #eeeeee; }

@@ -39,8 +39,10 @@ $.getJSON('ajax/reit_data.json', function(data) {
 		});
 });
 var bg;
-var dataInfo = false;
+var dataInfo = false,
+	active = false;
 var companiesSimilar = [];
+
 
 function init(){
 	$('.info').hide();
@@ -110,6 +112,7 @@ $("td").each(function() {
 
 
 function restore() {
+  active = false;
   $("tr td").each(function() {
 	var orig = $.data(this, 'css');
 	$(this).animate({opacity: orig.opacity, width: orig.width, height: orig.height}, 600);
@@ -154,26 +157,28 @@ function clearContent(){
 function listenToMax(){
 	$li = $("ul li");
 	$siblings = $('.siblings');
-	$info = $('.info')
+	$info = $('.info');
 	$('td').click(function(){
-	if($(this).html() === '')
-		$('.warning').fadeIn('700').css("display","inline").fadeOut('200');
-	bg = $(this).css('backgroundColor');
-	//console.log(bg);
-	$info.css('backgroundColor',bg);
+	// if($(this).html() === '')
+	//	$('.warning').fadeIn('700').css("display","inline").fadeOut('200');
+	if(!active){
+		bg = $(this).css('backgroundColor');
+		$info.css('backgroundColor',bg);
+	}
+	active = true;
 });
+
 	$li.click(function(){
-	  	var selection = $(this).text();
-	  	clearContent();
-	  	shrink();
-	  	$('.info').show();
-	//	$siblings.show().animate({
-	//	opacity: 1,
-	//	width:"360px",
-	//	height:"300px"
-	// },1000).html(
-	// "<p>List of Companies in Similar State</p>"
-	// );
+		var selection = $(this).text();
+		clearContent();
+		shrink();
+
+		$('.info').show().animate({
+			opacity: 1,
+			width:"30%",
+			height:"200px"
+		},1000);
+		$('.pick').html(selection);
 		$('.child').show().animate({
 		opacity: 1,
 		width:"400px",
@@ -183,8 +188,7 @@ function listenToMax(){
 	"<br>"+"<h3>Outlook:</h3><span>Positive</span><br><h3>Property</h3><br><h3>Subsector</h3>"
 	);
 	extract($(this).parent());
-	//insert($siblings);
-	$('#tableSection').fadeIn(400);
+	// $('#tableSection').fadeIn(400);
 
 	});
 	//	$(window).click(function(e) {
@@ -199,10 +203,10 @@ $('img.closeBtn').click(function(){
 	restore();
 	renderContent();
 	listenToMax();
-	$('.info').hide();
+	$('.info').animate({
+		opacity:0
+	},1000);
 	companiesSimilar.length = 0;
-	console.log("click");
-
 });
 
 function extract(val){
