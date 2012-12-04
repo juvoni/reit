@@ -39,10 +39,13 @@ $.getJSON('ajax/reit_data.json', function(data) {
 		});
 });
 var bg;
-var dataInfo = false;
+var dataInfo = false,
+	active = false;
 var companiesSimilar = [];
 
+
 function init(){
+	$('.info').hide();
 	$('tbody tr').each(function(){
 		for(var i = 0 ; i<6;i++){
 			$(this).append('<td></td>');
@@ -70,47 +73,58 @@ function init(){
 
 function renderContent(){
 	var items = [];
+	var buffer = 0;
 	$('td').each(function(){
 		items.length = 0;
 		var $this = $(this);
 		for(var i = 0; i<binder.length;i++){
 			if($this.attr("class") === binder[i].getFinancial() && $this.closest("tr").attr("class") === binder[i].getBusiness()){
 				 if ($this.find('ul').length > 0){
-					items.push('<li>'+binder[i].getName()+'</li>');
+					if(buffer <=2){
+						items.push('<li>'+binder[i].getName()+'</li>');
+						buffer++;
+					}
+					else if(buffer === 3){
+						items.push('<li class = "more">more..</li>');
+						buffer++;
+					}
 				 }
 				 else{
-					$this.append("<ul></ul>");
-					items.push('<li>'+binder[i].getName()+'</li>');
+						$this.append("<ul></ul>");
+						items.push('<li>'+binder[i].getName()+'</li>');
+						buffer++;
 				 }
 			}
 		}
 		$this.find('ul').append(items.join(''));
+		buffer = 0;
 	});
 };
 
 init();
 
 $("td").each(function() {
-    var $this = $(this);
-    $.data(this, 'css', { opacity: $this.css('opacity'), 
-                          width: $this.css('width'),
-                          height: $this.parent().css('height') });
+	var $this = $(this);
+	$.data(this, 'css', { opacity: $this.css('opacity'),
+						  width: $this.css('width'),
+						  height: $this.parent().css('height') });
 });
 
 
 function restore() {
+  active = false;
   $("tr td").each(function() {
-    var orig = $.data(this, 'css');
-    $(this).animate({opacity: orig.opacity, width: orig.width, height: orig.height}, 600);
+	var orig = $.data(this, 'css');
+	$(this).animate({opacity: orig.opacity, width: orig.width, height: orig.height}, 600);
   });
-	$('h2').animate({
+	$('.heading h2').animate({
 		fontSize:"22px",
-		marginLeft:"200px"
+		marginLeft:"250px"
 	},1000);
 	$('div.y-axis img').animate({
 			width: "39px",
 			height: "389px",
-			marginTop: "100px"
+			marginTop: "80px"
 	},1000);
 };
 
@@ -125,12 +139,12 @@ function shrink(){
 	},800);
 	$('h2').animate({
 		fontSize:"16px",
-		marginLeft:"-40px"
+		marginLeft:"160px"
 	},1000);
 	$('div.y-axis img').animate({
 			width: "25px",
 			height: "260px",
-			marginTop: "-100px"
+			marginTop: "-80px"
 	},1000);
 };
 
@@ -144,25 +158,28 @@ function clearContent(){
 function listenToMax(){
 	$li = $("ul li");
 	$siblings = $('.siblings');
+	$info = $('.info');
 	$('td').click(function(){
-	if($(this).html() === '')
-		$('.warning').fadeIn('700').css("display","inline").fadeOut('200');
-	bg = $(this).css('backgroundColor');
-	console.log(bg);
-	$siblings.css('backgroundColor',bg);
+	// if($(this).html() === '')
+	//	$('.warning').fadeIn('700').css("display","inline").fadeOut('200');
+	if(!active){
+		bg = $(this).css('backgroundColor');
+		$info.css('backgroundColor',bg);
+	}
+	active = true;
 });
+
 	$li.click(function(){
 		var selection = $(this).text();
 		clearContent();
 		shrink();
-		$('.max').show();
-		$siblings.show().animate({
-		opacity: 1,
-		width:"360px",
-		height:"300px"
-	},1000).html(
-	"<p>List of Companies in Similar State</p>"
-	).css('backgroundColor',bg);
+
+		$('.info').show().animate({
+			opacity: 1,
+			width:"30%",
+			height:"200px"
+		},1000);
+		$('.pick').html(selection);
 		$('.child').show().animate({
 		opacity: 1,
 		width:"400px",
@@ -172,23 +189,25 @@ function listenToMax(){
 	"<br>"+"<h3>Outlook:</h3><span>Positive</span><br><h3>Property</h3><br><h3>Subsector</h3>"
 	);
 	extract($(this).parent());
-	insert($siblings);
+	// $('#tableSection').fadeIn(400);
 
 	});
+	//	$(window).click(function(e) {
+	//	if(e.srcElement.className != 'info')// then e.srcElement.className has the class
+	//		restore();
+	// });
 
 };
 listenToMax();
 
-
-$('.max').click(function(){
+$('img.closeBtn').click(function(){
 	restore();
 	renderContent();
 	listenToMax();
-	$('.max').hide();
-	$('.siblings').html('').hide();
-	$('.child').html('').hide();
+	$('.info').animate({
+		opacity:0
+	},1000);
 	companiesSimilar.length = 0;
-
 });
 
 function extract(val){
