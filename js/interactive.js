@@ -232,7 +232,9 @@ $('img.closeBtn').click(function(){
 		},1000);
 		$('.info').css("visibility","hidden");
 		companiesSimilar.length = 0;
+		$('.content').html('');
 	}
+
 });
 
 function getParamters(that){
@@ -266,5 +268,5 @@ function insert(){
 		content+="<li class = 'compSimilar'>"+companiesSimilar[i]+"</li>";
 	}
 	content += "</ul>";
-	$('.expand').html('<img class ="closeBtn" src="img/close.png" width="24px" height="24px">'+content);
+	$('.content').html(content);
 };
