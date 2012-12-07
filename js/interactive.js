@@ -105,7 +105,6 @@ function renderContent(){
 
 init();
 
-
 $("td").each(function() {
 	var $this = $(this);
 	$.data(this, 'css', { opacity: $this.css('opacity'),
@@ -113,16 +112,16 @@ $("td").each(function() {
 						  height: $this.parent().css('height') });
 });
 
-
 function restore() {
   active = false;
   $("tr td").each(function() {
-	var orig = $.data(this, 'css');
+	var orig = $.data(this,'css');
 	$(this).animate({opacity: orig.opacity, width: orig.width, height: orig.height}, 600);
   });
+
 	$('.heading h2').animate({
 		fontSize:"22px",
-		marginLeft:"250px"
+		marginLeft:"280px"
 	},1000);
 	$('div.y-axis img').animate({
 			width: "39px",
@@ -178,8 +177,8 @@ function listenToMax(){
 	  		groupCompanies();
 	  		$('.expand').css("visibility","visible").show().animate({
 	  			opacity: 1,
-	  			width:"30%",
-	  			height:"300px"
+	  			width:"35%",
+	  			height:"310px"
 	  		},1000);
 	  	}
 	  	else{
@@ -220,7 +219,14 @@ $('img.closeBtn').click(function(){
 		$('.info').css("visibility","hidden");
 		companiesSimilar.length = 0;
 		$('.content').html('');
+		$('.info div img').detach();
 	}
+});
+$('.info div').click(function(){
+	$('.info').animate({
+			opacity:0
+		},1000);
+	$('.info').css("visibility","hidden");
 });
 
 function getParamters(that){
@@ -234,8 +240,6 @@ function extract(val){
 	});
 };
 function groupCompanies(){
-	console.log(finRisk);
-	console.log(bizRisk);
 	for(var i = 0; i<binder.length;i++){
 			if(finRisk === binder[i].getFinancial() && bizRisk === binder[i].getBusiness()){
 				console.log('push');
@@ -243,14 +247,26 @@ function groupCompanies(){
 			}
 	}
 	insert();
+	$('.content li').click(function(){
+	console.log('Overlay');
+	var selection = $(this).text();
+	$('.info').css("visibility","visible").show().animate({
+			opacity: 1,
+			width:"30%",
+			height:"200px"
+		},1000);
+		$('.pick').html(selection);
+});
 };
 
 function insert(){
-	var content = "<p>List of Companies in Similar State</p>";
+	var content = " ";
 	content +="<ul>";
 	for(var i = 0; i<companiesSimilar.length;i++){
 		content+="<li class = 'compSimilar'>"+companiesSimilar[i]+"</li>";
 	}
 	content += "</ul>";
 	$('.content').html(content);
+	$('.info div').append('<img src="img/back.png" alt="" class="back" width="30px" height="20px">');
 };
+
