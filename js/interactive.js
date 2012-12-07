@@ -42,8 +42,7 @@ var bg;
 var dataInfo = false,
 	active = false;
 var companiesSimilar = [];
-var finRisk, bizRisk;
-
+var finRisk = bizRisk = ' ';
 
 function init(){
 	$('.info').hide();
@@ -70,6 +69,7 @@ function init(){
 		}
 	});
 	renderContent();
+
 };
 
 function renderContent(){
@@ -104,6 +104,7 @@ function renderContent(){
 };
 
 init();
+
 
 $("td").each(function() {
 	var $this = $(this);
@@ -161,47 +162,37 @@ function listenToMax(){
 	$siblings = $('.siblings');
 	$info = $('.info');
 	$('td').click(function(){
-	// if($(this).html() === '')
-	//	$('.warning').fadeIn('700').css("display","inline").fadeOut('200');
-	getParamters($(this));
-	if(!active){
-		bg = $(this).css('backgroundColor');
-		$info.css('backgroundColor',bg);
-		$('.expand').css('backgroundColor',bg);
-	}
-	active = true;
+		if(!active){
+			bg = $(this).css('backgroundColor');
+			$info.css('backgroundColor',bg);
+			$('.expand').css('backgroundColor',bg);
+		}
+		active = true;
 });
 
 	$li.click(function(){
-		var selection = $(this).text();
-		clearContent();
-		shrink();
-		if(selection === "more.."){
-			groupCompanies();
-			$('.expand').css("visibility","visible").show().animate({
-				opacity: 1,
-				width:"30%",
-				height:"300px"
-			},1000);
-		}
-		else{
-			$('.expand').css("visibility","hidden");
-			$('.info').css("visibility","visible").show().animate({
-			opacity: 1,
-			width:"30%",
-			height:"200px"
-		},1000);
-		$('.pick').html(selection);
-		$('.child').show().animate({
-			opacity: 1,
-			width:"400px",
-			height:"300px"
-		},1000).html(
-		"<p>Company Profile</p><p>"+selection+"</p>"+"<h3>Rating:<h3><span>BBB</span>"+
-		"<br>"+"<h3>Outlook:</h3><span>Positive</span><br><h3>Property</h3><br><h3>Subsector</h3>"
-		);
-		}
-
+	  	var selection = $(this).text();
+	  	if(selection === "more.."){
+	  		finRisk = $(this).closest('td').attr("class");
+	  		bizRisk = $(this).closest('tr').attr("class");
+	  		groupCompanies();
+	  		$('.expand').css("visibility","visible").show().animate({
+	  			opacity: 1,
+	  			width:"30%",
+	  			height:"300px"
+	  		},1000);
+	  	}
+	  	else{
+	  		$('.expand').css("visibility","hidden");
+	  		$('.info').css("visibility","visible").show().animate({
+	  		opacity: 1,
+	  		width:"30%",
+	  		height:"200px"
+	  	},1000);
+	  	$('.pick').html(selection);
+	  	}
+	  	clearContent();
+	  	shrink();
 	  	//extract($(this).parent());
 	  	});
 	//	$(window).click(function(e) {
@@ -212,19 +203,15 @@ function listenToMax(){
 };
 listenToMax();
 
+
 $('img.closeBtn').click(function(){
 	if(active){
 		restore();
 		renderContent();
 		listenToMax();
-		if($('this').parent().attr('class') == '.info'){
-			console.log("yes");
-		}
-		else {
-			console.log("no");
-		}
 		$('.expand').animate({
-			opacity:0
+			opacity:0,
+			visibility:"hidden"
 		},1000);
 		$('.expand').css("visibility","hidden");
 		$('.info').animate({
@@ -234,17 +221,13 @@ $('img.closeBtn').click(function(){
 		companiesSimilar.length = 0;
 		$('.content').html('');
 	}
-
 });
 
 function getParamters(that){
-		finRisk = that.attr("class");
-		bizRisk = that.closest("tr").attr("class");
+		finRisk = that.attr('class');
+		bizRisk = that.closest("tr").attr('class');
 };
-function getParamtersOfLi(that){
-		finRisk = that.parent().attr("class");
-		bizRisk = that.parent().closest("tr").attr("class");
-};
+
 function extract(val){
 	$(val).find('li').each(function(){
 		companiesSimilar.push($(this).text());
@@ -255,6 +238,7 @@ function groupCompanies(){
 	console.log(bizRisk);
 	for(var i = 0; i<binder.length;i++){
 			if(finRisk === binder[i].getFinancial() && bizRisk === binder[i].getBusiness()){
+				console.log('push');
 				companiesSimilar.push("<li>"+binder[i].getName()+"</li>");
 			}
 	}
@@ -262,7 +246,7 @@ function groupCompanies(){
 };
 
 function insert(){
-	var content = "<p>List of Companies in Similar State</p>"
+	var content = "<p>List of Companies in Similar State</p>";
 	content +="<ul>";
 	for(var i = 0; i<companiesSimilar.length;i++){
 		content+="<li class = 'compSimilar'>"+companiesSimilar[i]+"</li>";
