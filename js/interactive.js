@@ -126,7 +126,7 @@ function restore() {
 	$('div.y-axis img').animate({
 			width: "39px",
 			height: "389px",
-			marginTop: "80px"
+			marginTop: "0px"
 	},1000);
 };
 
@@ -163,22 +163,30 @@ function listenToMax(){
 	$('td').click(function(){
 	// if($(this).html() === '')
 	//	$('.warning').fadeIn('700').css("display","inline").fadeOut('200');
+	getParamters($(this));
 	if(!active){
 		bg = $(this).css('backgroundColor');
 		$info.css('backgroundColor',bg);
+		$('.expand').css('backgroundColor',bg);
 	}
 	active = true;
 });
 
 	$li.click(function(){
-	  	var selection = $(this).text();
-	  	clearContent();
-	  	shrink();
-	  	if(selection === "more.."){
-
+		var selection = $(this).text();
+		clearContent();
+		shrink();
+		if(selection === "more.."){
+			groupCompanies();
+			$('.expand').css("visibility","visible").show().animate({
+				opacity: 1,
+				width:"30%",
+				height:"300px"
+			},1000);
 		}
 		else{
-					$('.info').css("visibility","visible").show().animate({
+			$('.expand').css("visibility","hidden");
+			$('.info').css("visibility","visible").show().animate({
 			opacity: 1,
 			width:"30%",
 			height:"200px"
@@ -194,7 +202,7 @@ function listenToMax(){
 		);
 		}
 
-	  	extract($(this).parent());
+	  	//extract($(this).parent());
 	  	});
 	//	$(window).click(function(e) {
 	//	if(e.srcElement.className != 'info')// then e.srcElement.className has the class
@@ -205,32 +213,58 @@ function listenToMax(){
 listenToMax();
 
 $('img.closeBtn').click(function(){
-	restore();
-	renderContent();
-	listenToMax();
-	$('.info').animate({
-		opacity:0
-	},1000);
-	$('.info').css("visibility","hidden");
-	companiesSimilar.length = 0;
+	if(active){
+		restore();
+		renderContent();
+		listenToMax();
+		if($('this').parent().attr('class') == '.info'){
+			console.log("yes");
+		}
+		else {
+			console.log("no");
+		}
+		$('.expand').animate({
+			opacity:0
+		},1000);
+		$('.expand').css("visibility","hidden");
+		$('.info').animate({
+			opacity:0
+		},1000);
+		$('.info').css("visibility","hidden");
+		companiesSimilar.length = 0;
+	}
 });
 
 function getParamters(that){
 		finRisk = that.attr("class");
 		bizRisk = that.closest("tr").attr("class");
 };
+function getParamtersOfLi(that){
+		finRisk = that.parent().attr("class");
+		bizRisk = that.parent().closest("tr").attr("class");
+};
 function extract(val){
 	$(val).find('li').each(function(){
 		companiesSimilar.push($(this).text());
 	});
 };
+function groupCompanies(){
+	console.log(finRisk);
+	console.log(bizRisk);
+	for(var i = 0; i<binder.length;i++){
+			if(finRisk === binder[i].getFinancial() && bizRisk === binder[i].getBusiness()){
+				companiesSimilar.push("<li>"+binder[i].getName()+"</li>");
+			}
+	}
+	insert();
+};
 
-function insert(that){
+function insert(){
 	var content = "<p>List of Companies in Similar State</p>"
 	content +="<ul>";
 	for(var i = 0; i<companiesSimilar.length;i++){
 		content+="<li class = 'compSimilar'>"+companiesSimilar[i]+"</li>";
 	}
 	content += "</ul>";
-	that.html(content);
+	$('.expand').html('<img class ="closeBtn" src="img/close.png" width="24px" height="24px">'+content);
 };

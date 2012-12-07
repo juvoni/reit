@@ -78,8 +78,8 @@ h2{
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 	letter-spacing:5px;
 	display:inline;
-
 }
+
 div.heading{
 	width:1000px;
 }
@@ -117,6 +117,22 @@ div.y-axis img{
 	top: 0px;
 	right: 0px;
 }
+/*tr.satisfactory td.intermediate ul{
+	-moz-column-count: 2;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 20px;
+    column-count: 2;
+    column-gap: 20px;
+}
+tr.fair td.intermediate ul{
+	-moz-column-count: 2;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 20px;
+    column-count: 2;
+    column-gap: 20px;
+}*/
 .expand{
   	z-index: 8;
   	visibility:hidden;
