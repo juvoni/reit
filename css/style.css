@@ -154,7 +154,7 @@ tr.fair td.intermediate ul{
 .info{
 	z-index: 10;
 	visibility:hidden;
-	background:red;
+	background:#ccc;
 	position: absolute;
 	top: 200px;
 	right: 500px;

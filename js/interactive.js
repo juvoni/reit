@@ -219,15 +219,11 @@ $('img.closeBtn').click(function(){
 		$('.info').css("visibility","hidden");
 		companiesSimilar.length = 0;
 		$('.content').html('');
-		$('.info div img').detach();
+		$('img.back').detach();
 	}
 });
-$('.info div').click(function(){
-	$('.info').animate({
-			opacity:0
-		},1000);
-	$('.info').css("visibility","hidden");
-});
+
+
 
 function getParamters(that){
 		finRisk = that.attr('class');
@@ -268,5 +264,11 @@ function insert(){
 	content += "</ul>";
 	$('.content').html(content);
 	$('.info div').append('<img src="img/back.png" alt="" class="back" width="30px" height="20px">');
+	$('img.back').click(function(){
+	$('.info').animate({
+			opacity:0
+		},1000);
+	$('.info').css("visibility","hidden");
+});
 };
 
