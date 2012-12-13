@@ -31,6 +31,15 @@ ul li{
 	margin-left: 50px;
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
+.optionSection{
+	 position: relative;
+	 display: block;
+	 margin: 0 auto;
+	 width:600px;
+	 height: 40px;
+	 clear:both;
+	 padding-top:20px;
+}
 .max{
 	width: 24px;
 	height: 24px;

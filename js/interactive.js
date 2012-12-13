@@ -31,7 +31,6 @@ reit_comp.prototype = {
 $.ajaxSetup({
 	async: false
 });
-
 var binder = [];
 $.getJSON('ajax/reit_data.json', function(data) {
 		$.each(data, function(){
