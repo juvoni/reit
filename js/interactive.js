@@ -26,8 +26,6 @@ reit_comp.prototype = {
 
 };
 
-
-
 $.ajaxSetup({
 	async: false
 });
@@ -42,6 +40,39 @@ var dataInfo = false,
 	active = false;
 var companiesSimilar = [];
 var finRisk = bizRisk = ' ';
+
+
+init();
+
+$("td").each(function() {
+	var $this = $(this);
+	$.data(this, 'css', { opacity: $this.css('opacity'),
+						  width: $this.css('width'),
+						  height: $this.parent().css('height') });
+});
+
+listenToMax();
+
+$('img.closeBtn').click(function(){
+	if(active){
+		restore();
+		renderContent();
+		listenToMax();
+		$('.expand').animate({
+			opacity:0,
+			visibility:"hidden"
+		},1000);
+		$('.expand').css("visibility","hidden");
+		$('.info').animate({
+			opacity:0
+		},1000);
+		$('.info').css("visibility","hidden");
+		companiesSimilar.length = 0;
+		$('.content').html('');
+		$('img.back').detach();
+	}
+});
+
 
 function init(){
 	$('.info').hide();
@@ -70,7 +101,6 @@ function init(){
 	renderContent();
 
 };
-
 function renderContent(){
 	var items = [];
 	var buffer = 0;
@@ -101,15 +131,50 @@ function renderContent(){
 		buffer = 0;
 	});
 };
+function clearContent(){
+	$('td').each(function(){
+		$(this).html('');
+	});
+};
 
-init();
 
-$("td").each(function() {
-	var $this = $(this);
-	$.data(this, 'css', { opacity: $this.css('opacity'),
-						  width: $this.css('width'),
-						  height: $this.parent().css('height') });
-});
+function listenToMax(){
+	$li = $("ul li");
+	$siblings = $('.siblings');
+	$info = $('.info');
+	$('td').click(function(){
+		if(!active){
+			bg = $(this).css('backgroundColor');
+			$info.css('backgroundColor',bg);
+			$('.expand').css('backgroundColor',bg);
+		}
+		active = true;
+	});
+	$li.click(function(){
+		var selection = $(this).text();
+		if(selection === "more.."){
+			finRisk = $(this).closest('td').attr("class");
+			bizRisk = $(this).closest('tr').attr("class");
+			groupCompanies();
+			$('.expand').css("visibility","visible").show().animate({
+				opacity: 1,
+				width:"35%",
+				height:"310px"
+			},1000);
+		}
+		else{
+			$('.expand').css("visibility","hidden");
+			$('.info').css("visibility","visible").show().animate({
+				opacity: 1,
+				width:"30%",
+				height:"200px"
+			},1000);
+			$('.pick').html(selection);
+		}
+		clearContent();
+		shrink();
+		});
+};
 
 function restore() {
   active = false;
@@ -149,82 +214,6 @@ function shrink(){
 	},1000);
 	$('.optionSection').hide();
 };
-
-function clearContent(){
-	$('td').each(function(){
-		$(this).html('');
-	});
-};
-
-
-function listenToMax(){
-	$li = $("ul li");
-	$siblings = $('.siblings');
-	$info = $('.info');
-	$('td').click(function(){
-		if(!active){
-			bg = $(this).css('backgroundColor');
-			$info.css('backgroundColor',bg);
-			$('.expand').css('backgroundColor',bg);
-		}
-		active = true;
-});
-
-	$li.click(function(){
-	  	var selection = $(this).text();
-	  	if(selection === "more.."){
-	  		finRisk = $(this).closest('td').attr("class");
-	  		bizRisk = $(this).closest('tr').attr("class");
-	  		groupCompanies();
-	  		$('.expand').css("visibility","visible").show().animate({
-	  			opacity: 1,
-	  			width:"35%",
-	  			height:"310px"
-	  		},1000);
-	  	}
-	  	else{
-	  		$('.expand').css("visibility","hidden");
-	  		$('.info').css("visibility","visible").show().animate({
-	  		opacity: 1,
-	  		width:"30%",
-	  		height:"200px"
-	  	},1000);
-	  	$('.pick').html(selection);
-	  	}
-	  	clearContent();
-	  	shrink();
-	  	//extract($(this).parent());
-	  	});
-	//	$(window).click(function(e) {
-	//	if(e.srcElement.className != 'info')// then e.srcElement.className has the class
-	//		restore();
-	// });
-
-};
-listenToMax();
-
-
-$('img.closeBtn').click(function(){
-	if(active){
-		restore();
-		renderContent();
-		listenToMax();
-		$('.expand').animate({
-			opacity:0,
-			visibility:"hidden"
-		},1000);
-		$('.expand').css("visibility","hidden");
-		$('.info').animate({
-			opacity:0
-		},1000);
-		$('.info').css("visibility","hidden");
-		companiesSimilar.length = 0;
-		$('.content').html('');
-		$('img.back').detach();
-	}
-});
-
-
 
 function getParamters(that){
 		finRisk = that.attr('class');
