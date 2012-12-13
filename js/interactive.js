@@ -73,6 +73,9 @@ $('img.closeBtn').click(function(){
 	}
 });
 
+$('.btn-group > button.btn').click(function(){
+	console.log($(this).text());
+});
 
 function init(){
 	$('.info').hide();
