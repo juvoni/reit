@@ -252,7 +252,7 @@ function groupCompanies(){
 			height:"200px"
 		},1000);
 		$('.pick').html(selection);
-});
+	});
 };
 
 function insert(){
@@ -263,7 +263,7 @@ function insert(){
 	}
 	content += "</ul>";
 	$('.content').html(content);
-	$('.info div').append('<img src="img/back.png" alt="" class="back" width="30px" height="20px">');
+	$('.info div').append('<img src="img/back_2.png" alt="" class="back" width="30px" height="20px">');
 	$('img.back').click(function(){
 	$('.info').animate({
 			opacity:0
