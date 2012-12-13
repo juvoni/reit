@@ -127,6 +127,7 @@ function restore() {
 			height: "389px",
 			marginTop: "0px"
 	},1000);
+	$('.optionSection').show();
 };
 
 function shrink(){
@@ -146,6 +147,7 @@ function shrink(){
 			height: "260px",
 			marginTop: "-80px"
 	},1000);
+	$('.optionSection').hide();
 };
 
 function clearContent(){
@@ -237,13 +239,11 @@ function extract(val){
 function groupCompanies(){
 	for(var i = 0; i<binder.length;i++){
 			if(finRisk === binder[i].getFinancial() && bizRisk === binder[i].getBusiness()){
-				console.log('push');
 				companiesSimilar.push("<li>"+binder[i].getName()+"</li>");
 			}
 	}
 	insert();
 	$('.content li').click(function(){
-	console.log('Overlay');
 	var selection = $(this).text();
 	$('.info').css("visibility","visible").show().animate({
 			opacity: 1,
