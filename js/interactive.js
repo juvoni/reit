@@ -1,7 +1,8 @@
-function reit_comp(name, financial, business){
+function reit_comp(name, financial, business, sector){
 	this.name = name,
 	this.financial = financial,
-	this.business = business;
+	this.business = business,
+	this.sector = sector;
 };
 
 reit_comp.prototype = {
@@ -22,6 +23,12 @@ reit_comp.prototype = {
 	},
 	setBusiness: function(business){
 		this.business = business;
+	},
+	getSector: function(){
+		return this.sector;
+	},
+	setSector: function(sector){
+		this.sector = sector;
 	}
 
 };
@@ -31,7 +38,15 @@ $.ajaxSetup({
 });
 var binder = [];
 $.getJSON('ajax/reit_data.json', function(data) {
+		var sec;
 		$.each(data, function(){
+			console.log(this['Sector'].length);
+			for(var i = 0; i<this['Sector'].length; i++){
+				if(this['Sector'][i] === 'true'){
+					sec = this['Sector'][i].key;
+					//console.log(sec);
+				}
+			}
 			binder.push(new reit_comp(this['Company Name'], this['Financial Risk Profile'], this['Business Risk Profile']));
 		});
 });
@@ -67,6 +82,7 @@ $('img.closeBtn').click(function(){
 			opacity:0
 		},1000);
 		$('.info').css("visibility","hidden");
+		$('.category').css("visibility","hidden");
 		companiesSimilar.length = 0;
 		$('.content').html('');
 		$('img.back').detach();
@@ -155,15 +171,15 @@ function listenToMax(){
 	});
 	$li.click(function(){
 		var selection = $(this).text();
+		finRisk = $(this).closest('td').attr("class");
+		bizRisk = $(this).closest('tr').attr("class");
 		if(selection === "more.."){
-			finRisk = $(this).closest('td').attr("class");
-			bizRisk = $(this).closest('tr').attr("class");
 			groupCompanies();
 			$('.expand').css("visibility","visible").show().animate({
 				opacity: 1,
 				width:"35%",
 				height:"310px"
-			},1000);
+			},500);
 		}
 		else{
 			$('.expand').css("visibility","hidden");
@@ -171,7 +187,8 @@ function listenToMax(){
 				opacity: 1,
 				width:"30%",
 				height:"200px"
-			},1000);
+			},500);
+			$('.category').css("visibility","visible").html("<p>"+finRisk+" & "+bizRisk+"</p>");
 			$('.pick').html(selection);
 		}
 		clearContent();
@@ -188,7 +205,7 @@ function restore() {
 
 	$('.heading h2').animate({
 		fontSize:"22px",
-		marginLeft:"280px"
+		marginLeft:"380px"
 	},1000);
 	$('div.y-axis img').animate({
 			width: "39px",
@@ -237,11 +254,15 @@ function groupCompanies(){
 	insert();
 	$('.content li').click(function(){
 	var selection = $(this).text();
+	$('.expand').animate({
+		opacity: 0.6
+	},500);
 	$('.info').css("visibility","visible").show().animate({
 			opacity: 1,
 			width:"30%",
 			height:"200px"
-		},1000);
+		},500);
+	$('.category').css("visibility","visible");
 		$('.pick').html(selection);
 	});
 };
@@ -259,7 +280,9 @@ function insert(){
 	$('.info').animate({
 			opacity:0
 		},1000);
+	$('.expand').css("opacity",1);
 	$('.info').css("visibility","hidden");
+	$('.category').css("visibility","hidden");
 });
 };
 
