@@ -38,16 +38,14 @@ $.ajaxSetup({
 });
 var binder = [];
 $.getJSON('ajax/reit_data.json', function(data) {
-		var sec;
 		$.each(data, function(){
-			console.log(this['Sector'].length);
-			for(var i = 0; i<this['Sector'].length; i++){
-				if(this['Sector'][i] === 'true'){
-					sec = this['Sector'][i].key;
-					//console.log(sec);
+			var key;
+			for(key in this['Sector']){
+				if(this['Sector'][key] === 'true'){
+					break;
 				}
 			}
-			binder.push(new reit_comp(this['Company Name'], this['Financial Risk Profile'], this['Business Risk Profile']));
+			binder.push(new reit_comp(this['Company Name'], this['Financial Risk Profile'], this['Business Risk Profile'], key));
 		});
 });
 var bg;
