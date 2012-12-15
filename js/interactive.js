@@ -194,6 +194,7 @@ function listenToMax(){
 				width:"30%",
 				height:"200px"
 			},500);
+			finRisk = (finRisk === 'highly_leveraged')?'highly  leveraged':finRisk;
 			$('.category').css("visibility","visible").html("<p>"+finRisk+" & "+bizRisk+"</p>");
 			$('.pick').html(selection);
 		}
