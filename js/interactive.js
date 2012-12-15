@@ -48,11 +48,12 @@ $.getJSON('ajax/reit_data.json', function(data) {
 			binder.push(new reit_comp(this['Company Name'], this['Financial Risk Profile'], this['Business Risk Profile'], key));
 		});
 });
-var bg;
+var bg, selectedOption = 'All', priorText;
 var dataInfo = false,
 	active = false;
 var companiesSimilar = [];
 var finRisk = bizRisk = ' ';
+var selection;
 
 
 init();
@@ -64,13 +65,13 @@ $("td").each(function() {
 						  height: $this.parent().css('height') });
 });
 
-listenToMax();
-
 $('img.closeBtn').click(function(){
 	if(active){
 		restore();
-		renderContent();
-		listenToMax();
+		if(selectedOption == 'All')
+			renderContent();
+		else
+			generateOption();
 		$('.expand').animate({
 			opacity:0,
 			visibility:"hidden"
@@ -88,7 +89,12 @@ $('img.closeBtn').click(function(){
 });
 
 $('.btn-group > button.btn').click(function(){
-	console.log($(this).text());
+	selectedOption = $(this).text();
+	if(priorText != selectedOption && selectedOption !== 'All')
+		generateOption();
+	else if(priorText != selectedOption && selectedOption == 'All')
+		renderContent();
+	priorText = $(this).text();
 });
 
 function init(){
@@ -121,6 +127,7 @@ function init(){
 function renderContent(){
 	var items = [];
 	var buffer = 0;
+	clearContent();
 	$('td').each(function(){
 		items.length = 0;
 		var $this = $(this);
@@ -147,6 +154,7 @@ function renderContent(){
 		$this.find('ul').append(items.join(''));
 		buffer = 0;
 	});
+	listenToMax();
 };
 function clearContent(){
 	$('td').each(function(){
@@ -167,8 +175,8 @@ function listenToMax(){
 		}
 		active = true;
 	});
-	$li.click(function(){
-		var selection = $(this).text();
+	$('li').click(function(){
+		selection = $(this).text();
 		finRisk = $(this).closest('td').attr("class");
 		bizRisk = $(this).closest('tr').attr("class");
 		if(selection === "more.."){
@@ -242,6 +250,38 @@ function extract(val){
 	$(val).find('li').each(function(){
 		companiesSimilar.push($(this).text());
 	});
+};
+function generateOption(){
+	var items = [];
+	var buffer = 0;
+	clearContent();
+	$('td').each(function(){
+		items.length = 0;
+		var $this = $(this);
+		getParamters($this);
+		for(var i = 0; i<binder.length;i++){
+			if(finRisk === binder[i].getFinancial() && bizRisk === binder[i].getBusiness() && binder[i].getSector() === selectedOption){
+				 if ($this.find('ul').length > 0){
+					if(buffer <=2){
+						items.push('<li>'+binder[i].getName()+'</li>');
+						buffer++;
+					}
+					else if(buffer === 3){
+						items.push('<li class = "more">more..</li>');
+						buffer++;
+					}
+				 }
+				 else{
+						$this.append("<ul></ul>");
+						items.push('<li>'+binder[i].getName()+'</li>');
+						buffer++;
+				 }
+			}
+		}
+		$this.find('ul').append(items.join(''));
+		buffer = 0;
+	});
+	listenToMax();
 };
 function groupCompanies(){
 	for(var i = 0; i<binder.length;i++){
